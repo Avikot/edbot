@@ -1,6 +1,6 @@
 package com.edbot.diploma.bot.core.model.message;
 
-import com.edbot.diploma.bot.core.constants.MessageType;
+import com.edbot.diploma.bot.core.model.constants.MessageType;
 import com.edbot.diploma.bot.core.model.Sender;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;

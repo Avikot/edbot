@@ -1,5 +1,6 @@
 package com.edbot.diploma.bot.core.model.callbacks;
 
+import com.edbot.diploma.bot.core.model.constants.EventType;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
@@ -13,7 +14,7 @@ public class CallbackEvent extends ApplicationEvent {
     private String event;
 
     @JsonProperty("timestamp")
-    private String timestamp;
+    private String customTimestamp;
 
     @JsonProperty("message_token")
     private String messageToken;
@@ -23,16 +24,10 @@ public class CallbackEvent extends ApplicationEvent {
      *
      * @param source the object on which the event initially occurred (never {@code null})
      */
-    public CallbackEvent(Object source, String event, String timestamp, String messageToken) {
+    public CallbackEvent(Object source, EventType event, String customTimestamp, String messageToken) {
         super(source);
-        this.event = event;
-        this.timestamp = timestamp;
+        this.event = event.getEventType();
+        this.customTimestamp = customTimestamp;
         this.messageToken = messageToken;
     }
-
-//    public CallbackEvent(String event, String timestamp, String messageToken) {
-//        this.event = event;
-//        this.timestamp = timestamp;
-//        this.messageToken = messageToken;
-//    }
 }

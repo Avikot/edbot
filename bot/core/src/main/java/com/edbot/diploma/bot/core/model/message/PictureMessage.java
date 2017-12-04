@@ -1,6 +1,6 @@
 package com.edbot.diploma.bot.core.model.message;
 
-import com.edbot.diploma.bot.core.constants.MessageType;
+import com.edbot.diploma.bot.core.model.constants.MessageType;
 import com.edbot.diploma.bot.core.model.Sender;
 import lombok.Data;
 
@@ -16,5 +16,10 @@ public class PictureMessage extends Message {
         this.text = text;
         this.media = media;
         this.thumbnail = thumbnail;
+    }
+
+    @Override
+    public void setType(String type) {
+        super.setType(MessageType.PICTURE.getType());
     }
 }

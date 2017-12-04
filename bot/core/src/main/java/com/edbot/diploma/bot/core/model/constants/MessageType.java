@@ -1,4 +1,4 @@
-package com.edbot.diploma.bot.core.constants;
+package com.edbot.diploma.bot.core.model.constants;
 
 public enum MessageType {
 

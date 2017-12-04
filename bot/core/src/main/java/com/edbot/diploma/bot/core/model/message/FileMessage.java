@@ -1,6 +1,6 @@
 package com.edbot.diploma.bot.core.model.message;
 
-import com.edbot.diploma.bot.core.constants.MessageType;
+import com.edbot.diploma.bot.core.model.constants.MessageType;
 import com.edbot.diploma.bot.core.model.Sender;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
@@ -19,5 +19,10 @@ public class FileMessage extends Message {
         this.media = media;
         this.size = size;
         this.fileName = fileName;
+    }
+
+    @Override
+    public void setType(String type) {
+        super.setType(MessageType.FILE.getType());
     }
 }
