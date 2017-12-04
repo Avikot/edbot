@@ -21,8 +21,8 @@ public class ConversationStartedCallback extends CallbackEvent {
     @JsonProperty("subscribed")
     private Boolean subscribed;
 
-    public ConversationStartedCallback(String event, String timestamp, String messageToken, String type, String context, User user, Boolean subscribed) {
-        super(event, timestamp, messageToken);
+    public ConversationStartedCallback(Object source, String event, String timestamp, String messageToken, String type, String context, User user, Boolean subscribed) {
+        super(source, event, timestamp, messageToken);
         this.type = type;
         this.context = context;
         this.user = user;

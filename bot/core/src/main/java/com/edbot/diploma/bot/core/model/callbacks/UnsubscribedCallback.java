@@ -11,8 +11,8 @@ public class UnsubscribedCallback extends CallbackEvent {
     @JsonProperty("user_id")
     private String userId;
 
-    public UnsubscribedCallback(String event, String timestamp, String messageToken, String userId) {
-        super(event, timestamp, messageToken);
+    public UnsubscribedCallback(Object source, String event, String timestamp, String messageToken, String userId) {
+        super(source, event, timestamp, messageToken);
         this.userId = userId;
     }
 }

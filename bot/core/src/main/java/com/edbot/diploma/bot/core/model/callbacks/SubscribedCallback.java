@@ -12,8 +12,8 @@ public class SubscribedCallback extends CallbackEvent {
     @JsonProperty("user")
     private User user;
 
-    public SubscribedCallback(String event, String timestamp, String messageToken, User user) {
-        super(event, timestamp, messageToken);
+    public SubscribedCallback(Object source, String event, String timestamp, String messageToken, User user) {
+        super(source, event, timestamp, messageToken);
         this.user = user;
     }
 }

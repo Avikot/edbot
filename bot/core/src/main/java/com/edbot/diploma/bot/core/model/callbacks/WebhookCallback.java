@@ -7,7 +7,7 @@ import lombok.Data;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class WebhookCallback extends CallbackEvent {
 
-    public WebhookCallback(String event, String timestamp, String messageToken) {
-        super("webhook", timestamp, messageToken);
+    public WebhookCallback(Object source, String event, String timestamp, String messageToken) {
+        super(source, "webhook", timestamp, messageToken);
     }
 }
