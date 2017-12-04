@@ -12,9 +12,6 @@
     <groupId>com.diploma.edbot</groupId>
     <artifactId>bot</artifactId>
     <packaging>pom</packaging>
-    <modules>
-        <module>core</module>
-    </modules>
 
 
 </project>
