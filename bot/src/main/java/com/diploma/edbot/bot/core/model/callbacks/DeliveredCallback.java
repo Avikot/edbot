@@ -12,6 +12,9 @@ public class DeliveredCallback extends CallbackEvent {
     @JsonProperty("user_id")
     private String userId;
 
+    public DeliveredCallback() {
+    }
+
     /**
      * Create a new ApplicationEvent.
      *

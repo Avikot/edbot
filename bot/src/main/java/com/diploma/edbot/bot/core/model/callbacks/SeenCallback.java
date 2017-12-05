@@ -12,6 +12,9 @@ public class SeenCallback extends CallbackEvent {
     @JsonProperty("user_id")
     private String userId;
 
+    public SeenCallback() {
+    }
+
     /**
      * Create a new ApplicationEvent.
      *

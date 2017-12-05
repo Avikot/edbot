@@ -19,6 +19,10 @@ public class CallbackEvent extends ApplicationEvent {
     @JsonProperty("message_token")
     private String messageToken;
 
+    public CallbackEvent() {
+        super(CallbackEvent.class);
+    }
+
     /**
      * Create a new ApplicationEvent.
      *

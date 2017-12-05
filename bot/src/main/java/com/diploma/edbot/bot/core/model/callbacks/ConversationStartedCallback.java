@@ -22,6 +22,9 @@ public class ConversationStartedCallback extends CallbackEvent {
     @JsonProperty("subscribed")
     private Boolean subscribed;
 
+    public ConversationStartedCallback() {
+    }
+
     /**
      * Create a new ApplicationEvent.
      *

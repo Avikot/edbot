@@ -14,6 +14,9 @@ public class FailedCallback extends CallbackEvent {
 
     private String desc;
 
+    public FailedCallback() {
+    }
+
     /**
      * Create a new ApplicationEvent.
      *

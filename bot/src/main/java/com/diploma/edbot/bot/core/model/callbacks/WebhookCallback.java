@@ -8,6 +8,9 @@ import lombok.Data;
 @JsonIgnoreProperties(ignoreUnknown = true)
 public class WebhookCallback extends CallbackEvent {
 
+    public WebhookCallback() {
+    }
+
     /**
      * Create a new ApplicationEvent.
      *

@@ -12,6 +12,9 @@ public class UnsubscribedCallback extends CallbackEvent {
     @JsonProperty("user_id")
     private String userId;
 
+    public UnsubscribedCallback() {
+    }
+
     /**
      * Create a new ApplicationEvent.
      *

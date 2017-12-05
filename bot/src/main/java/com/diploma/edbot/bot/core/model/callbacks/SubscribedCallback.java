@@ -13,6 +13,9 @@ public class SubscribedCallback extends CallbackEvent {
     @JsonProperty("user")
     private User user;
 
+    public SubscribedCallback() {
+    }
+
     /**
      * Create a new ApplicationEvent.
      *

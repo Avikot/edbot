@@ -13,6 +13,9 @@ public class MessageCallback<T extends Message> extends CallbackEvent {
     private Sender sender;
     private T message;
 
+    public MessageCallback() {
+    }
+
     /**
      * Create a new ApplicationEvent.
      *
