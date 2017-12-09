@@ -1,14 +1,12 @@
-package com.diploma.edbot.bot.core.listeners;
+package com.diploma.edbot.bot.core.listener;
 
-import com.diploma.edbot.bot.core.model.callbacks.SeenCallback;
+import com.diploma.edbot.bot.core.model.callback.SeenCallback;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationListener;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Component;
 import org.springframework.web.client.RestTemplate;
-
-import java.util.Date;
 
 @Component
 public class OnSeenEventListener implements ApplicationListener<SeenCallback> {

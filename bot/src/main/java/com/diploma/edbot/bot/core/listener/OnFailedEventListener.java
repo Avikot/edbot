@@ -1,6 +1,6 @@
-package com.diploma.edbot.bot.core.listeners;
+package com.diploma.edbot.bot.core.listener;
 
-import com.diploma.edbot.bot.core.model.callbacks.FailedCallback;
+import com.diploma.edbot.bot.core.model.callback.FailedCallback;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationListener;

@@ -1,25 +1,27 @@
 package com.diploma.edbot.bot.web.controller;
 
 import com.diploma.edbot.bot.Signature;
-import com.diploma.edbot.bot.core.model.callbacks.CallbackEvent;
-import com.diploma.edbot.bot.core.model.callbacks.ConversationStartedCallback;
-import com.diploma.edbot.bot.core.model.callbacks.DeliveredCallback;
-import com.diploma.edbot.bot.core.model.callbacks.FailedCallback;
-import com.diploma.edbot.bot.core.model.callbacks.MessageCallback;
-import com.diploma.edbot.bot.core.model.callbacks.SeenCallback;
-import com.diploma.edbot.bot.core.model.callbacks.SubscribedCallback;
-import com.diploma.edbot.bot.core.model.callbacks.UnsubscribedCallback;
-import com.diploma.edbot.bot.core.model.callbacks.WebhookCallback;
-import com.diploma.edbot.bot.core.model.constants.ConstantValues;
-import com.diploma.edbot.bot.core.model.constants.HttpHeader;
-import com.diploma.edbot.bot.core.model.constants.ViberUrl;
+import com.diploma.edbot.bot.ai.BotMessageResolvingService;
+import com.diploma.edbot.bot.core.model.callback.CallbackEvent;
+import com.diploma.edbot.bot.core.model.callback.ConversationStartedCallback;
+import com.diploma.edbot.bot.core.model.callback.DeliveredCallback;
+import com.diploma.edbot.bot.core.model.callback.FailedCallback;
+import com.diploma.edbot.bot.core.model.callback.MessageCallback;
+import com.diploma.edbot.bot.core.model.callback.SeenCallback;
+import com.diploma.edbot.bot.core.model.callback.SubscribedCallback;
+import com.diploma.edbot.bot.core.model.callback.UnsubscribedCallback;
+import com.diploma.edbot.bot.core.model.callback.WebhookCallback;
+import com.diploma.edbot.bot.core.model.constant.ConstantValues;
+import com.diploma.edbot.bot.core.model.constant.HttpHeader;
+import com.diploma.edbot.bot.core.model.constant.ViberUrl;
 import com.diploma.edbot.bot.core.model.response.WebhookResponse;
-import com.diploma.edbot.bot.web.exceptions.AccessDeniedException;
+import com.diploma.edbot.bot.web.exception.AccessDeniedException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -41,10 +43,12 @@ public class EventsController {
     private Logger logger = LoggerFactory.getLogger(this.getClass());
 
     private ApplicationEventPublisher applicationEventPublisher;
+    private BotMessageResolvingService messageResolvingService;
 
     @Autowired
-    public EventsController(ApplicationEventPublisher applicationEventPublisher) {
+    public EventsController(ApplicationEventPublisher applicationEventPublisher, BotMessageResolvingService messageResolvingService) {
         this.applicationEventPublisher = applicationEventPublisher;
+        this.messageResolvingService = messageResolvingService;
     }
 
     @RequestMapping(value = "/receive-event", method = RequestMethod.POST)
@@ -57,7 +61,36 @@ public class EventsController {
         CallbackEvent callbackEvent = identifyEvent(body);
         applicationEventPublisher.publishEvent(callbackEvent);
 
-        return ResponseEntity.ok((System.currentTimeMillis()));
+        return resolveEventResponse(callbackEvent);
+    }
+
+    private ResponseEntity resolveEventResponse(CallbackEvent callbackEvent) {
+        String type = callbackEvent.getEvent();
+
+        switch (type) {
+            case "conversation_started":
+                ConversationStartedCallback conversationStarted = (ConversationStartedCallback) callbackEvent;
+                return new ResponseEntity<>(messageResolvingService.resolveMessage(conversationStarted), HttpStatus.OK);
+            case "webhook":
+                return ResponseEntity.ok().build();
+            case "subscribed":
+//                return mapper.readValue(body, SubscribedCallback.class);
+            case "unsubscribed":
+//                return mapper.readValue(body, UnsubscribedCallback.class);
+            case "delivered":
+//                return mapper.readValue(body, DeliveredCallback.class);
+            case "seen":
+//                return mapper.readValue(body, SeenCallback.class);
+            case "failed":
+//                return mapper.readValue(body, FailedCallback.class);
+            case "message":
+//                return mapper.readValue(body, MessageCallback.class);
+            default:
+//                return new FailedCallback(body, System.currentTimeMillis(), "0", "0", "Failed to recognize event");
+
+        }
+
+        return null;
     }
 
     @RequestMapping(value = "/test", method = RequestMethod.GET)

@@ -1,6 +1,6 @@
-package com.diploma.edbot.bot.core.listeners;
+package com.diploma.edbot.bot.core.listener;
 
-import com.diploma.edbot.bot.core.model.callbacks.WebhookCallback;
+import com.diploma.edbot.bot.core.model.callback.WebhookCallback;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.context.ApplicationListener;

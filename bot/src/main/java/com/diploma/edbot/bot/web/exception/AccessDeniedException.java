@@ -1,4 +1,4 @@
-package com.diploma.edbot.bot.web.exceptions;
+package com.diploma.edbot.bot.web.exception;
 
 public class AccessDeniedException extends RuntimeException {
 

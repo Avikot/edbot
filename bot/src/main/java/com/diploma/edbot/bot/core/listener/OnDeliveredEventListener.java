@@ -1,6 +1,6 @@
-package com.diploma.edbot.bot.core.listeners;
+package com.diploma.edbot.bot.core.listener;
 
-import com.diploma.edbot.bot.core.model.callbacks.DeliveredCallback;
+import com.diploma.edbot.bot.core.model.callback.DeliveredCallback;
 import org.springframework.context.ApplicationListener;
 import org.springframework.stereotype.Component;
 

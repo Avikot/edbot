@@ -1,18 +1,18 @@
-package com.diploma.edbot.bot.core.model.callbacks;
+package com.diploma.edbot.bot.core.model.callback;
 
-import com.diploma.edbot.bot.core.model.constants.EventType;
+import com.diploma.edbot.bot.core.model.constant.EventType;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.Data;
 
 @Data
 @JsonIgnoreProperties(ignoreUnknown = true)
-public class UnsubscribedCallback extends CallbackEvent {
+public class DeliveredCallback extends CallbackEvent {
 
     @JsonProperty("user_id")
     private String userId;
 
-    public UnsubscribedCallback() {
+    public DeliveredCallback() {
     }
 
     /**
@@ -22,8 +22,8 @@ public class UnsubscribedCallback extends CallbackEvent {
      * @param customTimestamp
      * @param messageToken
      */
-    public UnsubscribedCallback(Object source, Long customTimestamp, String messageToken, String userId) {
-        super(source, EventType.UNSUBSCRIBED, customTimestamp, messageToken);
+    public DeliveredCallback(Object source, Long customTimestamp, String messageToken, String userId) {
+        super(source, EventType.DELIVERED, customTimestamp, messageToken);
         this.userId = userId;
     }
 }

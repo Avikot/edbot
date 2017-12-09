@@ -1,6 +1,6 @@
 package com.diploma.edbot.bot.core.model.message;
 
-import com.diploma.edbot.bot.core.model.constants.MessageType;
+import com.diploma.edbot.bot.core.model.constant.MessageType;
 import com.diploma.edbot.bot.core.model.Sender;
 import lombok.Data;
 

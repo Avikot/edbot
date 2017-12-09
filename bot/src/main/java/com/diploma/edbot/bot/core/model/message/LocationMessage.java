@@ -2,7 +2,7 @@ package com.diploma.edbot.bot.core.model.message;
 
 import com.diploma.edbot.bot.core.model.Location;
 import com.diploma.edbot.bot.core.model.Sender;
-import com.diploma.edbot.bot.core.model.constants.MessageType;
+import com.diploma.edbot.bot.core.model.constant.MessageType;
 import lombok.Data;
 
 @Data

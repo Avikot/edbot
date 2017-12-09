@@ -1,4 +1,4 @@
-package com.diploma.edbot.bot.core.model.constants;
+package com.diploma.edbot.bot.core.model.constant;
 
 import java.util.stream.Stream;
 

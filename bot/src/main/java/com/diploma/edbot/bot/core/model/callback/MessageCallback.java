@@ -1,7 +1,7 @@
-package com.diploma.edbot.bot.core.model.callbacks;
+package com.diploma.edbot.bot.core.model.callback;
 
 import com.diploma.edbot.bot.core.model.Sender;
-import com.diploma.edbot.bot.core.model.constants.EventType;
+import com.diploma.edbot.bot.core.model.constant.EventType;
 import com.diploma.edbot.bot.core.model.message.Message;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.Data;
