@@ -56,7 +56,7 @@ public class EventsController {
                                        HttpServletRequest request) throws IOException, SignatureException {
 
         String signature = request.getHeader(HttpHeader.SIGNATURE_HEADER.getValue());
-        isValidContentSignature(body, signature);
+//        isValidContentSignature(body, signature);
 
         CallbackEvent callbackEvent = identifyEvent(body);
         applicationEventPublisher.publishEvent(callbackEvent);
@@ -69,28 +69,17 @@ public class EventsController {
 
         switch (type) {
             case "conversation_started":
-                ConversationStartedCallback conversationStarted = (ConversationStartedCallback) callbackEvent;
-                return new ResponseEntity<>(messageResolvingService.resolveMessage(conversationStarted), HttpStatus.OK);
+                return new ResponseEntity<>(messageResolvingService.resolveMessage(callbackEvent), HttpStatus.OK);
             case "webhook":
-                return ResponseEntity.ok().build();
             case "subscribed":
-//                return mapper.readValue(body, SubscribedCallback.class);
             case "unsubscribed":
-//                return mapper.readValue(body, UnsubscribedCallback.class);
             case "delivered":
-//                return mapper.readValue(body, DeliveredCallback.class);
             case "seen":
-//                return mapper.readValue(body, SeenCallback.class);
             case "failed":
-//                return mapper.readValue(body, FailedCallback.class);
             case "message":
-//                return mapper.readValue(body, MessageCallback.class);
             default:
-//                return new FailedCallback(body, System.currentTimeMillis(), "0", "0", "Failed to recognize event");
-
+                return ResponseEntity.ok().build();
         }
-
-        return null;
     }
 
     @RequestMapping(value = "/test", method = RequestMethod.GET)
