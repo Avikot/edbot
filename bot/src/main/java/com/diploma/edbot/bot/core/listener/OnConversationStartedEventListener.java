@@ -14,5 +14,7 @@ public class OnConversationStartedEventListener implements ApplicationListener<C
     @Override
     public void onApplicationEvent(ConversationStartedCallback event) {
         logger.info("User started conversation, name={}, id={}", event.getUser().getName(), event.getUser().getId());
+
+
     }
 }
