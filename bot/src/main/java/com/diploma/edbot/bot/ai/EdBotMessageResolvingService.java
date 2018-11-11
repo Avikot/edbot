@@ -4,6 +4,7 @@ import com.diploma.edbot.bot.BotProfile;
 import com.diploma.edbot.bot.core.model.Sender;
 import com.diploma.edbot.bot.core.model.callback.CallbackEvent;
 import com.diploma.edbot.bot.core.model.callback.ConversationStartedCallback;
+import com.diploma.edbot.bot.core.model.callback.MessageCallback;
 import com.diploma.edbot.bot.core.model.message.Message;
 import com.diploma.edbot.bot.core.model.message.TextMessage;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -22,6 +23,22 @@ public class EdBotMessageResolvingService implements BotMessageResolvingService 
         if (event instanceof ConversationStartedCallback) {
             ConversationStartedCallback conversationStarted = (ConversationStartedCallback) event;
             return buildWelcomeMessage(conversationStarted);
+        } else if (event instanceof MessageCallback) {
+            MessageCallback messageCallback = (MessageCallback) event;
+            Message message = messageCallback.getMessage();
+            String type = message.getType();
+
+            if (type.equals("text")) {
+                TextMessage textMessage = (TextMessage) message;
+
+                String text = textMessage.getText();
+
+                if (text.equals("Yes")) {
+                    return new TextMessage(message.getReceiver(), message.getTrackingData(), message.getMinApiVersion(), message.getSender(), "You say YES");
+                } else {
+                    return new TextMessage(message.getReceiver(), message.getTrackingData(), message.getMinApiVersion(), message.getSender(), "You say NO");
+                }
+            }
         }
 
         return null;

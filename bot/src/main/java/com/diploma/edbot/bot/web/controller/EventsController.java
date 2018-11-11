@@ -23,10 +23,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.ApplicationEventPublisher;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestMethod;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.client.RestTemplate;
 
 import javax.servlet.http.HttpServletRequest;
@@ -56,7 +53,7 @@ public class EventsController {
                                        HttpServletRequest request) throws IOException, SignatureException {
 
         String signature = request.getHeader(HttpHeader.SIGNATURE_HEADER.getValue());
-//        isValidContentSignature(body, signature);
+        isValidContentSignature(body, signature);
 
         CallbackEvent callbackEvent = identifyEvent(body);
         applicationEventPublisher.publishEvent(callbackEvent);
@@ -64,6 +61,7 @@ public class EventsController {
         return resolveEventResponse(callbackEvent);
     }
 
+    @SuppressWarnings("unchecked")
     private ResponseEntity resolveEventResponse(CallbackEvent callbackEvent) {
         String type = callbackEvent.getEvent();
 
@@ -77,6 +75,7 @@ public class EventsController {
             case "seen":
             case "failed":
             case "message":
+                return new ResponseEntity(messageResolvingService.resolveMessage(callbackEvent), HttpStatus.OK);
             default:
                 return ResponseEntity.ok().build();
         }
@@ -89,6 +88,16 @@ public class EventsController {
         logger.info((new Date()).toString());
 
         return String.valueOf(System.currentTimeMillis());
+    }
+
+    @GetMapping(value = "/healthcheck/bla")
+    public String home() {
+        return "Viber Bot TKozak BLA";
+    }
+
+    @GetMapping(value = "/healthcheck")
+    public String healthcheck() {
+        return "Viber Bot TKozak";
     }
 
     @RequestMapping(value = "/send_webhook", method = RequestMethod.POST)
@@ -107,7 +116,7 @@ public class EventsController {
 
     private void isAccessDenied(String tokenUsername, String webHook) {
         String base64EncodedUsernameToken
-                = Base64.getEncoder().encodeToString((ConstantValues.MY_USERNAME + ":" + HttpHeader.TOKEN_VALUE).getBytes());
+                = Base64.getEncoder().encodeToString((ConstantValues.MY_USERNAME.getValue() + ":" + HttpHeader.TOKEN_VALUE.getValue()).getBytes());
 
         if (!base64EncodedUsernameToken.equals(tokenUsername)) {
             logger.warn("Invalid access token by setting WebHook: " + webHook);
